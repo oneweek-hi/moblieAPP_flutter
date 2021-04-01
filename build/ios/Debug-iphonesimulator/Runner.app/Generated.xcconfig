@@ -7,6 +7,7 @@ SYMROOT=${SOURCE_ROOT}/../build/ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
 DART_OBFUSCATION=false
+EXTRA_FRONT_END_OPTIONS=--no-sound-null-safety
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
 PACKAGE_CONFIG=/Users/juhui/Desktop/classwork/moblieAPP_flutter/.dart_tool/package_config.json

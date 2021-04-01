@@ -2,12 +2,14 @@ name: Shrine
 description: Learn how to use Material for structure and layout.
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.10.0 <3.0.0'
   
 dependencies:
   flutter:
     sdk: flutter
   intl: ^0.15.6
+  url_launcher: ^6.0.3
+
 
   cupertino_icons: ^0.1.0
   shrine_images: 1.1.1
