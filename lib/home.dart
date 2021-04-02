@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'detail.dart';
 import 'model/products_repository.dart';
 import 'model/product.dart';
 
@@ -28,11 +29,12 @@ class HomePage extends StatefulWidget{
   HomePageSate createState()=> HomePageSate();
 }
 
+
+
 class HomePageSate extends State<HomePage>{
 
   //Your code here
   // TODO: Add a variable for Category (104)
-
 
   List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
@@ -54,35 +56,85 @@ class HomePageSate extends State<HomePage>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
-              aspectRatio: 18 / 11,
+              aspectRatio: 20 / 11,
               child: Image.asset(
                 product.assetName,
-                package: product.assetPackage,
-                fit: BoxFit.fitWidth,
-              ),
+                fit: BoxFit.cover,
+              )
             ),
             Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(10.0, 10.0, 3.0, 3.0),
+                    child: Column(
+                      // TODO: Align labels to the bottom and center (103)
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // TODO: Change innermost Column (103)
+                      children: <Widget>[
+                        // TODO: Handle overflowing labels (103)
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 5.0),
+                          child: Row(
+                            children:List.generate(product.star, (index){
+                              return
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                  size: 13,
+                                );
+                            },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(17.0, 0.0, 0.0, 5.0),
+                          child: Text(
+                            product.hotelName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        Row(
+                            children: [
+                              Icon(Icons.location_on, size:15, color:Colors.blue),
+
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(4.3, 0.0, 10.0, 0.0),
+                                child: Container(
+                                  width: 100,
+                                  child: Text(
+                                    product.location,
+                                  maxLines: 2,
+                                    style: TextStyle(
+                                      fontSize: 10),
+                                   ),
+                              ),
+                              ),
+                            ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+
+
+            ),
+            InkWell(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  // TODO: Align labels to the bottom and center (103)
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // TODO: Change innermost Column (103)
-                  children: <Widget>[
-                    // TODO: Handle overflowing labels (103)
-                    Text(
-                      product.name,
-                      style: theme.textTheme.headline6,
-                      maxLines: 1,
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      formatter.format(product.price),
-                      style: theme.textTheme.subtitle2,
-                    ),
-                  ],
+                padding: EdgeInsets.fromLTRB(120, 0.0, 0.0, 5.0),
+                child: Text(
+                  'more',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 12,
+                  ),
                 ),
               ),
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product)));
+                },
+
             ),
           ],
         ),
@@ -136,11 +188,11 @@ class HomePageSate extends State<HomePage>{
           padding: EdgeInsets.all(10),
       child: ToggleButtons(
             color: Colors.black.withOpacity(0.60),
-            selectedColor: Color(0xFF6200EE),
-            selectedBorderColor: Color(0xFF6200EE),
-            fillColor: Color(0xFF6200EE).withOpacity(0.08),
-            splashColor: Color(0xFF6200EE).withOpacity(0.12),
-            hoverColor: Color(0xFF6200EE).withOpacity(0.04),
+            selectedColor: Colors.blue,
+            selectedBorderColor: Colors.blue,
+            fillColor: Colors.blue.withOpacity(0.08),
+            splashColor: Colors.blue.withOpacity(0.12),
+            hoverColor: Colors.blue.withOpacity(0.04),
             borderRadius: BorderRadius.circular(4.0),
             isSelected: isSelected,
             highlightColor: Colors.transparent,
@@ -255,19 +307,69 @@ class HomePageSate extends State<HomePage>{
         child: ListTile(
           leading: Image.asset(
             product.assetName,
-            package: product.assetPackage,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
           ),
-              title: Text(
-                product.name,
-                style: theme.textTheme.headline6,
-                maxLines: 1,
-              ),
-              subtitle: Text(
-                formatter.format(product.price),
-                style: theme.textTheme.subtitle2,
-              ),
+
+          title: Row(
+            children:List.generate(product.star, (index){
+              return
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 13,
+                );
+            },
             ),
+          ),
+          subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                  child: Text(
+                    product.hotelName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                  child: Container(
+                    width: 170,
+                    child: Text(
+                      product.location,
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontSize: 10),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(190, 0.0, 0.0, 5.0),
+                    child: Text(
+                      'more',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product)));
+                  },
+
+                ),
+
+              ]
+
+          ),
+
+
+        ),
       );
     }).toList();
   }
@@ -275,18 +377,17 @@ class HomePageSate extends State<HomePage>{
 
   Widget getView() {
     if(isSelected[0]){
+      return ListView(
+        padding: EdgeInsets.all(16.0),
+        children: _buildListCards(context),
+      );
+    }else{
       return GridView.count(
         crossAxisCount: 2,
         padding: EdgeInsets.all(16.0),
         childAspectRatio: 8.0 / 9.0,
         children: _buildGridCards(context),
       );
-    }else{
-      return ListView(
-        padding: EdgeInsets.all(16.0),
-        children: _buildListCards(context),
-      );
-
     }
 
   }

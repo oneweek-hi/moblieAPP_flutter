@@ -72,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 TextButton(
+
                   style: TextButton.styleFrom(
                     primary: Colors.black,
                   ),

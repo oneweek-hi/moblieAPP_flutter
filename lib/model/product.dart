@@ -20,24 +20,29 @@ class Product {
   const Product({
     @required this.category,
     @required this.id,
-    @required this.isFeatured,
-    @required this.name,
-    @required this.price,
+    @required this.star,
+    @required this.hotelName,
+    @required this.location,
+    @required this.callNumber,
+    @required this.detail,
   })  : assert(category != null),
         assert(id != null),
-        assert(isFeatured != null),
-        assert(name != null),
-        assert(price != null);
+        assert(star != null),
+        assert(hotelName != null),
+        assert(location != null),
+        assert(callNumber != null),
+        assert(detail != null);
 
   final Category category;
   final int id;
-  final bool isFeatured;
-  final String name;
-  final int price;
+  final int star;
+  final String hotelName;
+  final String location;
+  final String callNumber;
+  final String detail;
 
-  String get assetName => '$id-0.jpg';
-  String get assetPackage => 'shrine_images';
+  String get assetName => 'assets/hotel/$id.png';
 
   @override
-  String toString() => "$name (id=$id)";
+  String toString() => "$hotelName (id=$id)";
 }

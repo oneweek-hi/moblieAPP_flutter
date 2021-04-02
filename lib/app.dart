@@ -12,9 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:Shrine/model/product.dart';
 import 'package:Shrine/singUp.dart';
 import 'package:flutter/material.dart';
 
+import 'detail.dart';
 import 'home.dart';
 import 'login.dart';
 
@@ -23,6 +25,7 @@ class ShrineApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Shrine',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
@@ -33,10 +36,13 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/signUp': (BuildContext context) => SignUpPage(),
+//        '/detail': (BuildContext context) => DetailPage(),
       },
-      onGenerateRoute: _getRoute,
+      onGenerateRoute: _getRoute
       // TODO: Add a theme (103)
     );
+
+
   }
 
   Route<dynamic> _getRoute(RouteSettings settings) {
@@ -44,12 +50,23 @@ class ShrineApp extends StatelessWidget {
       return null;
     }
 
+
     return MaterialPageRoute<void>(
       settings: settings,
       builder: (BuildContext context) => LoginPage(),
       fullscreenDialog: true,
     );
   }
+}
+
+class ProductArguments {
+
+  final int id;
+  final int star;
+  final String hotelName;
+  final String location;
+
+  ProductArguments(this.hotelName, this.location,this.star,this.id);
 }
 
 // TODO: Build a Shrine Theme (103)

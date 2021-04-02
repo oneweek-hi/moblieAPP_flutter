@@ -34,7 +34,6 @@ class ProductCard extends StatelessWidget {
 
     final imageWidget = Image.asset(
       product.assetName,
-      package: product.assetPackage,
       fit: BoxFit.cover,
     );
 
@@ -54,7 +53,7 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                product == null ? '' : product.name,
+                product == null ? '' : product.hotelName,
                 style: theme.textTheme.headline6,
                 softWrap: false,
                 overflow: TextOverflow.ellipsis,
@@ -62,7 +61,7 @@ class ProductCard extends StatelessWidget {
               ),
               SizedBox(height: 4.0),
               Text(
-                product == null ? '' : formatter.format(product.price),
+                product == null ? '' : formatter.format(product.location),
                 style: theme.textTheme.subtitle2,
               ),
             ],
