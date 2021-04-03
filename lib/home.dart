@@ -33,6 +33,8 @@ class HomePage extends StatefulWidget{
 
 class HomePageSate extends State<HomePage>{
 
+//  final _saved = <Product>{};
+  final Set<Product> saved = Set<Product>();
   //Your code here
   // TODO: Add a variable for Category (104)
 
@@ -57,10 +59,14 @@ class HomePageSate extends State<HomePage>{
           children: <Widget>[
             AspectRatio(
               aspectRatio: 20 / 11,
-              child: Image.asset(
-                product.assetName,
-                fit: BoxFit.cover,
-              )
+              child:  Hero(
+                tag: product.hotelName,
+                child: Image.asset(
+                  product.assetName,
+                  fit: BoxFit.cover,
+
+                ),
+              ),
             ),
             Expanded(
                   child: Padding(
@@ -121,18 +127,21 @@ class HomePageSate extends State<HomePage>{
 
             ),
             InkWell(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(120, 0.0, 0.0, 5.0),
-                child: Text(
+              child: Align(
+                alignment: FractionalOffset.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 5.0, 5.0),
+                  child: Text(
                   'more',
                   style: TextStyle(
                     color: Colors.blue,
                     fontSize: 12,
                   ),
                 ),
+            ),
               ),
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product)));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product, saved)));
                 },
 
             ),
@@ -305,20 +314,26 @@ class HomePageSate extends State<HomePage>{
     return products.map((product) {
       return Card(
         child: ListTile(
-          leading: Image.asset(
-            product.assetName,
-            fit: BoxFit.cover,
-          ),
 
-          title: Row(
-            children:List.generate(product.star, (index){
-              return
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                  size: 13,
-                );
-            },
+          leading: Hero(
+            tag: product.hotelName,
+            child:Image.asset(
+              product.assetName,
+              fit: BoxFit.cover,
+            ),
+          ),
+          title: Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: Row(
+              children:List.generate(product.star, (index){
+                return
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 13,
+                  );
+              },
+              ),
             ),
           ),
           subtitle: Column(
@@ -348,8 +363,8 @@ class HomePageSate extends State<HomePage>{
                   ),
                 ),
                 InkWell(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(190, 0.0, 0.0, 5.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
                     child: Text(
                       'more',
                       style: TextStyle(
@@ -359,7 +374,7 @@ class HomePageSate extends State<HomePage>{
                     ),
                   ),
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product)));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product,saved)));
                   },
 
                 ),
@@ -382,11 +397,15 @@ class HomePageSate extends State<HomePage>{
         children: _buildListCards(context),
       );
     }else{
-      return GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(context),
+      return OrientationBuilder(
+          builder: (context, orientation){
+            return GridView.count(
+              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+              padding: EdgeInsets.all(16.0),
+              childAspectRatio: 8.0 / 9.0,
+              children: _buildGridCards(context),
+            );
+          }
       );
     }
 

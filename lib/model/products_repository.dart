@@ -27,7 +27,7 @@ class ProductsRepository {
       Product(
         category: Category.accessories,
         id: 0,
-        star: 5,
+        star: 3,
         hotelName: 'Stamford Plaza',
         location: 'Corner of Edward Street & Margaret Street',
         callNumber: '+48 576 2573 132',
@@ -44,7 +44,7 @@ class ProductsRepository {
       ),
       Product(
         category: Category.accessories,
-        id: 1,
+        id: 2,
         star: 4,
         hotelName: 'Charlotte Suites',
         location: '128 Charlotte Street, Brisbane CBD, 4000',
@@ -53,7 +53,7 @@ class ProductsRepository {
       ),
       Product(
         category: Category.accessories,
-        id: 2,
+        id: 3,
         star: 3,
         hotelName: 'Evolution Hotel',
         location: '18 Tank Street, Brisbane CBD, 4000',
@@ -62,7 +62,7 @@ class ProductsRepository {
       ),
       Product(
         category: Category.accessories,
-        id: 3,
+        id: 4,
         star: 4,
         hotelName: 'Ibis Elizabeth',
         location: '40 Elizabeth Street, Brisbane CBD',
@@ -71,7 +71,7 @@ class ProductsRepository {
       ),
       Product(
         category: Category.accessories,
-        id: 4,
+        id: 5,
         star: 3,
         hotelName: 'Oakwood Hotel',
         location: '15 Ivory Lane, Brisbane CBD',

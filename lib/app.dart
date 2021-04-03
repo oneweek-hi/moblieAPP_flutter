@@ -59,15 +59,5 @@ class ShrineApp extends StatelessWidget {
   }
 }
 
-class ProductArguments {
-
-  final int id;
-  final int star;
-  final String hotelName;
-  final String location;
-
-  ProductArguments(this.hotelName, this.location,this.star,this.id);
-}
-
 // TODO: Build a Shrine Theme (103)
 // TODO: Build a Shrine Text Theme (103)

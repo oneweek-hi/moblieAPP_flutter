@@ -5,22 +5,23 @@ import 'app.dart';
 
 class DetailPage extends StatefulWidget {
   final Product productData;
-  const DetailPage(this.productData);
+  final Set<Product> saved;
+  const DetailPage(this.productData, this.saved);
 
 //  const DetailPage({Key key, this.productData}) : super(key: key);
 
   @override
-  _DetailPageState createState() => _DetailPageState(productData);
+  _DetailPageState createState() => _DetailPageState(productData, saved);
 }
 
 class _DetailPageState extends State<DetailPage> {
+  Product productData;
+  Set<Product> saved;
+  _DetailPageState(this.productData,this.saved);
 
-  final Product productData;
-  _DetailPageState(this.productData);
 
   @override
   Widget build(BuildContext context) {
-
       Widget titleSection = Container(
         padding: const EdgeInsets.fromLTRB(30, 30, 0, 20),
           child: Column(
@@ -99,35 +100,42 @@ class _DetailPageState extends State<DetailPage> {
       );
 
 
-      Widget textSection = Container(
-        padding: const EdgeInsets.all(32),
 
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      // ignore: non_constant_identifier_names
+      Widget ImageSection = Container(
+          child:GestureDetector(
+            onDoubleTap: (){
+              setState(() {
+                if (saved.contains(productData)) {
+                  saved.remove(productData);
+                } else {
+                  saved.add(productData);
+                }
+              });
+            },
+            child: Stack(
+                children: <Widget>[
+                  Hero(
+                  tag: productData.hotelName,
+                  child: Image.asset(
+                    productData.assetName,
+                    fit: BoxFit.cover,
+                    width: 600,
+                    height: 240,
+                  ),
+                ),
+                Positioned(
+                  top: 15, right: 15,
+                  child: Icon(
+                    saved.contains(productData) ? Icons.favorite : Icons.favorite_border,
+                    color: saved.contains(productData) ? Colors.red : Colors.red,
+                  ),
+                ),
+              ],
+            ),
 
-            children: [
-
-              Icon(Icons.message, size:40),
-              Padding(
-                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
-                        Text(
-                          'Recent Message',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Long time no see!',
-                        )
-                      ]
-                  )
-              )
-            ]
-        ),
-      );
+          ),
+        );
 
       return MaterialApp(
         title: 'Flutter layout demo',
@@ -146,12 +154,7 @@ class _DetailPageState extends State<DetailPage> {
         ),
           body: ListView(
             children: [
-              Image.asset(
-                'assets/hotel/'+productData.id.toString()+'.png',
-                width: 600,
-                height: 240,
-                fit: BoxFit.cover,
-              ),
+              ImageSection,
               titleSection,
               const Divider(
                   height: 1,
@@ -159,7 +162,6 @@ class _DetailPageState extends State<DetailPage> {
                 indent: 20,
                 endIndent: 20,
               ),
-
               Padding(
                 padding: EdgeInsets.fromLTRB(30, 10, 30, 20),
                 child: Container(
@@ -180,46 +182,3 @@ class _DetailPageState extends State<DetailPage> {
   }
 
 
-class FavoriteWidget extends StatefulWidget {
-  @override
-  _FavoriteWidgetState createState() => _FavoriteWidgetState();
-}
-
-class _FavoriteWidgetState extends State<FavoriteWidget> {
-  bool _isFavorited = true;
-  int _favoriteCount = 12;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: EdgeInsets.all(0),
-          child: IconButton(
-            icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-            color: Colors.yellow[500],
-            onPressed: _toggleFavorite,
-          ),
-        ),
-        SizedBox(
-          width: 18,
-          child: Container(
-            child: Text('$_favoriteCount'),
-          ),
-        ),
-      ],
-    );
-  }
-  void _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _favoriteCount -= 1;
-        _isFavorited = false;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
-      }
-    });
-  }
-}
