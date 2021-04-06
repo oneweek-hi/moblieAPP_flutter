@@ -25,6 +25,8 @@ import 'model/product.dart';
 final isSelected = <bool> [true, false];
 
 
+
+
 class HomePage extends StatefulWidget{
   HomePageSate createState()=> HomePageSate();
 }
@@ -33,8 +35,9 @@ class HomePage extends StatefulWidget{
 
 class HomePageSate extends State<HomePage>{
 
+  static Set<Product> saved = Set<Product>();
 //  final _saved = <Product>{};
-  final Set<Product> saved = Set<Product>();
+
   //Your code here
   // TODO: Add a variable for Category (104)
 
@@ -175,7 +178,7 @@ class HomePageSate extends State<HomePage>{
               semanticLabel: 'search',
             ),
             onPressed: () {
-              print('Search button');
+              Navigator.pushNamed(context, '/search');
             },
           ),
           IconButton(
@@ -277,7 +280,7 @@ class HomePageSate extends State<HomePage>{
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/favorite');
               },
             ),
             ListTile(
@@ -287,10 +290,7 @@ class HomePageSate extends State<HomePage>{
                   size: 30.0),
               title: Text('My Page'),
               onTap: () {
-                // Update the state of the app
-                // …
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/mypage');
               },
             ),
           ],

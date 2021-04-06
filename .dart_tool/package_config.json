@@ -68,6 +68,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "graphs",
+      "rootUri": "file:///Users/juhui/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///Users/juhui/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.15.8",
       "packageUri": "lib/",
@@ -100,6 +106,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///Users/juhui/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "rive",
+      "rootUri": "file:///Users/juhui/flutter/.pub-cache/hosted/pub.dartlang.org/rive-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -206,7 +218,7 @@
       "languageVersion": "2.10"
     }
   ],
-  "generated": "2021-04-01T16:24:55.396792Z",
+  "generated": "2021-04-06T06:59:25.699634Z",
   "generator": "pub",
   "generatorVersion": "2.12.0"
 }

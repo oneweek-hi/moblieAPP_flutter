@@ -13,12 +13,13 @@
 // limitations under the License.
 
 import 'package:Shrine/model/product.dart';
+import 'package:Shrine/search.dart';
 import 'package:Shrine/singUp.dart';
 import 'package:flutter/material.dart';
-
-import 'detail.dart';
+import 'favoriteHotels.dart';
 import 'home.dart';
 import 'login.dart';
+import 'myPage.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -36,7 +37,9 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/signUp': (BuildContext context) => SignUpPage(),
-//        '/detail': (BuildContext context) => DetailPage(),
+        '/search': (BuildContext context) => SearchPage(),
+        '/favorite' : (BuildContext context) => FavoriteHotelsPage(),
+        '/mypage' : (BuildContext context) => MyPage(),
       },
       onGenerateRoute: _getRoute
       // TODO: Add a theme (103)
