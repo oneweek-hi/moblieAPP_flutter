@@ -291,6 +291,7 @@ class HomePageSate extends State<HomePage>{
               title: Text('My Page'),
               onTap: () {
                 Navigator.pushNamed(context, '/mypage');
+
               },
             ),
           ],
@@ -369,6 +370,7 @@ class HomePageSate extends State<HomePage>{
                       'more',
                       style: TextStyle(
                         color: Colors.blue,
+                        fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),
                     ),

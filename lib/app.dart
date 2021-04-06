@@ -40,6 +40,7 @@ class ShrineApp extends StatelessWidget {
         '/search': (BuildContext context) => SearchPage(),
         '/favorite' : (BuildContext context) => FavoriteHotelsPage(),
         '/mypage' : (BuildContext context) => MyPage(),
+        '/home' : (BuildContext context) => HomePage(),
       },
       onGenerateRoute: _getRoute
       // TODO: Add a theme (103)
