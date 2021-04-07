@@ -114,7 +114,7 @@ class HomePageSate extends State<HomePage>{
                                   width: 100,
                                   child: Text(
                                     product.location,
-                                  maxLines: 2,
+                                    maxLines: 2,
                                     style: TextStyle(
                                       fontSize: 10),
                                    ),
@@ -267,7 +267,7 @@ class HomePageSate extends State<HomePage>{
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/search');
               },
             ),
             ListTile(

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
+import 'detail.dart';
 import 'home.dart';
 import 'model/product.dart';
 
@@ -172,10 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               for (final hotel in HomePageSate.saved)
                 LocationListItem(
-                    id: hotel.id,
-                    hotelName: hotel.hotelName,
-                    location: hotel.location,
-                    imageUrl: hotel.assetName
+                    product: hotel,
                 ),
             ],
           ),
@@ -189,37 +187,40 @@ class _MyHomePageState extends State<MyHomePage> {
 class LocationListItem extends StatelessWidget {
   LocationListItem({
     Key key,
-    @required this.id,
-    @required this.hotelName,
-    @required this.location,
-    @required this.imageUrl,
+    @required this.product,
   }) : super(key: key);
 
-  final int id;
-  final String hotelName;
-  final String location;
-  final String imageUrl;
+  final Product product;
   final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Stack(
-            children: [
-              _buildParallaxBackground(context),
+      child: InkWell(
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Stack(
+              children: [
+                _buildParallaxBackground(context),
 //              _buildGradient(),
-              _buildTitleAndSubtitle(),
-            ],
+                _buildTitleAndSubtitle(),
+              ],
+            ),
           ),
         ),
-      ),
+
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(product, HomePageSate.saved)));
+        },
+      )
     );
   }
+
+
+
 
   Widget _buildParallaxBackground(BuildContext context) {
     return Flow(
@@ -230,7 +231,7 @@ class LocationListItem extends StatelessWidget {
       ),
       children: [
         Image.asset(
-          imageUrl,
+          product.assetName,
           key: _backgroundImageKey,
           fit: BoxFit.cover,
         ),
@@ -262,7 +263,7 @@ class LocationListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            hotelName,
+            product.hotelName,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -270,7 +271,7 @@ class LocationListItem extends StatelessWidget {
             ),
           ),
           Text(
-            location,
+            product.location,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
@@ -281,6 +282,7 @@ class LocationListItem extends StatelessWidget {
     );
   }
 }
+
 class ParallaxFlowDelegate extends FlowDelegate {
   ParallaxFlowDelegate({
     @required this.scrollable,
